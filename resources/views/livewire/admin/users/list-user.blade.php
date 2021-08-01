@@ -61,7 +61,7 @@
                               <td>{{ $user->email }}</td>
                               <td>
                                 <a href="" wire:click.prevent="edit({{ $user }})"><i class="fa fa-edit mr-2"></i></a>
-                                <a href="#"><i class="fa fa-trash text-danger"></i></a>
+                                <a href="" wire:click.prevent="confirmUserRemoval({{ $user->id }})"><i class="fa fa-trash text-danger"></i></a>
                               </td>
                             </tr>   
                           @endforeach
@@ -101,8 +101,6 @@
             </div>
 
             <div class="modal-body">
-             
-
                 <div class="form-group">
                   <label for="name">Full Name</label>
                   <input type="text" wire:model.defer="state.name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="nameHelp" placeholder="Enter Full Name">
@@ -140,8 +138,14 @@
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancel</button>
+              <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
+                @if ($showEditModal)
+                    <span>Save Changes</span>
+                @else 
+                    <span>Save</span>
+                @endif
+              </button>
             </div>
           </div>
           
@@ -149,5 +153,24 @@
         </div>
       </div>
 
+
+
+      <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header"><h5>Delete User</h5></div>
+          
+
+            <div class="modal-body">
+              <h4>Are you sure you want to delete this user?</h4>
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancel</button>
+              <button type="button" wire:click.prevent="deleteUser" class="btn btn-danger"><i class="fa fa-trash mr-1"></i> Delete User</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 </div>

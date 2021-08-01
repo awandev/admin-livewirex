@@ -12,6 +12,7 @@ class ListUser extends Component
     public $state = [];
     public $user;
     public $showEditModal = false;
+    public $userIdBeingRemoved = null;
     // public $name;
     // public $email;
     // public $password;
@@ -20,6 +21,8 @@ class ListUser extends Component
     public function addNew() 
     {
         // dd('addNew');
+        $this->state = [];
+        $this->showEditModal = false;
         $this->dispatchBrowserEvent('show-form'); 
     }
 
@@ -72,11 +75,24 @@ class ListUser extends Component
         $this->user->update($validateData);
         $this->dispatchBrowserEvent('hide-form', ['message' => 'User updated successfully!']);
         return redirect()->back();
-
-        
-
     }
     
+
+    public function confirmUserRemoval($userId)
+    {
+        $this->userIdBeingRemoved = $userId;
+        $this->dispatchBrowserEvent('show-delete-modal');
+    }
+
+    public function deleteUser()
+    {
+        $user = User::findOrFail($this->userIdBeingRemoved);
+        $user->delete();
+        
+        $this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'User deleted successfully']);
+    }
+
+
 
     public function render()
     {
