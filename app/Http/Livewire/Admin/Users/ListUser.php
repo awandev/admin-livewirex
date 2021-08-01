@@ -10,10 +10,12 @@ class ListUser extends Component
 {
 
     public $state = [];
-    public $name;
-    public $email;
-    public $password;
-    public $password_confirmation;
+    public $user;
+    public $showEditModal = false;
+    // public $name;
+    // public $email;
+    // public $password;
+    // public $password_confirmation;
     
     public function addNew() 
     {
@@ -24,6 +26,7 @@ class ListUser extends Component
     public function createUser() 
     {
         // dd($this->state);
+        $this->showEditModal = false;
         $validateData = Validator::make($this->state, [
             'name'  => 'required',
             'email' => 'required|email|unique:users',
@@ -41,6 +44,37 @@ class ListUser extends Component
 
         $this->dispatchBrowserEvent('hide-form', ['message' => 'User Added Successfully']);
         return redirect()->back();
+    }
+
+    public function edit(User $user)
+    {
+        $this->showEditModal = true;
+        $this->user = $user;
+        // dd($user->toArray());
+        $this->state = $user->toArray();
+        $this->dispatchBrowserEvent('show-form');
+        // dd($user);   
+    }
+
+    public function updateUser()
+    {
+        // dd('updateUser');
+        $validateData = Validator::make($this->state, [
+            'name'  => 'required',
+            'email' => 'required|email|unique:users,email,'.$this->user->id,
+            'password' => 'sometimes|confirmed',
+        ])->validate();
+
+        if(!empty($validateData['password'])) {
+            $validateData['password'] = bcrypt($validateData['password']);
+        }
+
+        $this->user->update($validateData);
+        $this->dispatchBrowserEvent('hide-form', ['message' => 'User updated successfully!']);
+        return redirect()->back();
+
+        
+
     }
     
 

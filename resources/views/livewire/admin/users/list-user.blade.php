@@ -60,7 +60,7 @@
                               <td>{{ $user->name }}</td>
                               <td>{{ $user->email }}</td>
                               <td>
-                                <a href="#"><i class="fa fa-edit mr-2"></i></a>
+                                <a href="" wire:click.prevent="edit({{ $user }})"><i class="fa fa-edit mr-2"></i></a>
                                 <a href="#"><i class="fa fa-trash text-danger"></i></a>
                               </td>
                             </tr>   
@@ -84,10 +84,17 @@
       <!-- Modal -->
       <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
-          <form autocomplete="off" wire:submit.prevent="createUser">
+          <form autocomplete="off" wire:submit.prevent="{{ $showEditModal ? 'updateUser' : 'createUser' }}">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+              <h5 class="modal-title" id="exampleModalLabel">
+                @if ($showEditModal)
+                    <span>Edit User</span>
+                @else
+                    <span>Add New User</span>
+                @endif
+                
+              </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
