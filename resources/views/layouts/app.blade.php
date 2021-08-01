@@ -10,11 +10,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>AdminLTE 3 | Starter</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
+
+
+  {{-- plugin --}}
+  <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -56,14 +61,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
 
+<!-- Plugin Tambahan -->
+<script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+
+<script>
+  $(document).ready(function(){
+    toastr.options = {
+      "positionClass" : "toast-bottom-right",
+      "progressBar": true,
+    }
+    window.addEventListener('hide-form', event => {
+      $('#form').modal('hide');
+      toastr.success(event.detail.message, 'Success !!')
+    })
+  });
+</script>
 <script>
   window.addEventListener('show-form', event => {
     $('#form').modal('show');
   })
 
-  window.addEventListener('hide-form', event => {
-    $('#form').modal('hide');
-  })
+  
 
   
 </script>
