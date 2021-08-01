@@ -33,6 +33,10 @@ class ListUser extends Component
 
         $validateData['password'] = bcrypt($validateData['password']);
         User::create($validateData);
+
+        // pass message session
+        session()->flash('message', 'User added successfully');
+
         $this->dispatchBrowserEvent('hide-form');
         return redirect()->back();
     }

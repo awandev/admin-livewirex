@@ -1,6 +1,10 @@
 <div>
     <div class="content-header">
         <div class="container-fluid">
+
+         
+
+
           <div class="row mb-2">
             <div class="col-sm-6">
               <h1 class="m-0">Users</h1>
@@ -19,6 +23,17 @@
        <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
+
+          @if (session()->has('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong><i class="fa fa-check-circle mr-1"></i> {{ session('message') }}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div> 
+          @endif
+          
+
           <div class="row">
             <div class="col-lg-12">
               <div class="d-flex justify-content-end mb-2">
