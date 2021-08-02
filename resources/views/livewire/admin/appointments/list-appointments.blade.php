@@ -7,12 +7,12 @@
 
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Users</h1>
+              <h1 class="m-0">Appoinments</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active">Users</li>
+                <li class="breadcrumb-item active">Appointments</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -38,7 +38,7 @@
             <div class="col-lg-12">
               <div class="d-flex justify-content-end mb-2">
                 <button wire:click.prevent="addNew" class="btn btn-primary">
-                  <i class="fa fa-plus-circle mr-1"> Add New User</i>
+                  <i class="fa fa-plus-circle mr-1"> Add New Appointments</i>
                 </button>
               </div>
               
@@ -48,30 +48,33 @@
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
+                            <th scope="col">Client Name</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Options</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach ($users as $user)
+                         
                             <tr>
-                              <th scope="row">{{ $loop->iteration }}</th>
-                              <td>{{ $user->name }}</td>
-                              <td>{{ $user->email }}</td>
+                              <th scope="row">1</th>
+                              <td>Client Name</td>
+                              <td>Date</td>
+                              <td>Time</td>
+                              <td>Status</td>
                               <td>
-                                <a href="" wire:click.prevent="edit({{ $user }})"><i class="fa fa-edit mr-2"></i></a>
-                                <a href="" wire:click.prevent="confirmUserRemoval({{ $user->id }})"><i class="fa fa-trash text-danger"></i></a>
+                                <a href=""><i class="fa fa-edit mr-2"></i></a>
+                                <a href=""><i class="fa fa-trash text-danger"></i></a>
                               </td>
                             </tr>   
-                          @endforeach
                           
                          
                         </tbody>
                       </table>
                 </div>
                 <div class="card-footer">
-                  {{ $users->links() }}
+                  
                 </div>
               </div>
             </div>
@@ -87,16 +90,11 @@
       <!-- Modal -->
       <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
-          <form autocomplete="off" wire:submit.prevent="{{ $showEditModal ? 'updateUser' : 'createUser' }}">
+          <form autocomplete="off">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
-                @if ($showEditModal)
-                    <span>Edit User</span>
-                @else
                     <span>Add New User</span>
-                @endif
-                
               </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -143,11 +141,7 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancel</button>
               <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
-                @if ($showEditModal)
-                    <span>Save Changes</span>
-                @else 
                     <span>Save</span>
-                @endif
               </button>
             </div>
           </div>
