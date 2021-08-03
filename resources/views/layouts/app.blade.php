@@ -20,6 +20,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   {{-- plugin --}}
   <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
 
+  <link rel="stylesheet" href="{{ asset('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+
+  <livewire:styles />
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -63,7 +66,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- Plugin Tambahan -->
 <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
-
+<script src="https://unpkg.com/moment"></script>
+<script src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <script>
   $(document).ready(function(){
     toastr.options = {
@@ -91,6 +95,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
   })
 
   
+</script>
+
+
+<script>
+  $(document).ready(function() {
+    $('#appointmentDate').datetimepicker({
+      format: 'L',
+    });
+
+    $('#appointmentDate').on("change.datetimepicker", function(e) {
+      let date = $(this).data('appointmentdate');
+      eval(date).set('state.date', $('#appointmentDateInput').val());
+    });
+  })
 </script>
 
 <livewire:scripts />
