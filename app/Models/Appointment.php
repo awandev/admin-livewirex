@@ -12,6 +12,7 @@ class Appointment extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'date'  => 'datetime'
+        'date'  => 'datetime',
+        'time'  => 'datetime',
     ];
 }

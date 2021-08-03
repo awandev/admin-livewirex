@@ -13,7 +13,7 @@ class CreateAppointmentForm extends Component
     public function createAppointment()
     {
         // dd($this->state);
-        $this->state['time'] = '00:00:00';
+        // $this->state['time'] = '00:00:00';
         $this->state['status'] = 'open';
         Appointment::create($this->state);
         $this->dispatchBrowserEvent('alert', ['message' => 'Appointment created successfully']);   
