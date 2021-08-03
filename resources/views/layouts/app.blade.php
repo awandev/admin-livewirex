@@ -117,10 +117,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
       let time = $(this).data('appointmenttime');
       eval(time).set('state.time', $('#appointmentTimeInput').val());
     });
-
-
-  })
+  });
 </script>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>">
+<script>
+  ClassicEditor
+    .create(document.querySelector('#note'))
+    .then(editor => {
+      document.querySelector('#submit').addEventListener('click', () => {
+        let note = $('#note').data('note');
+        eval(note).set('state.note', editor.getData());
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+</script>
+
 
 <livewire:scripts />
 </body>

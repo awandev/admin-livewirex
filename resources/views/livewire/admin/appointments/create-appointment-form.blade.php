@@ -66,16 +66,16 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-group">
+                                        <div wire:ignore class="form-group">
                                             <label for="note">Note:</label>
-                                            <textarea class="form-control"></textarea>
+                                            <textarea class="form-control" id="note" data-note="@this" wire:model.defer="state.note"></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <button type="button" class="btn btn-secondary"><i class="fa fa-times mr-1"></i> Cancel</button>
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i> Save</button>
+                                <button type="submit" id="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i> Save</button>
                             </div>
                         </div>
                     </form>
