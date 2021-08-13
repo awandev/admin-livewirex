@@ -72,6 +72,7 @@
                                   </td>
                                   <td>
                                     <a href="{{ route('admin.appointments.edit', $appointment) }}"><i class="fa fa-edit mr-2"></i></a>
+                                    <a href="" wire:click.prevent="confirmAppointmentRemoval({{ $appointment->id }})"><i class="fa fa-trash text-danger"></i></a>
                                   </td>
                                 </tr>
                             @endforeach
